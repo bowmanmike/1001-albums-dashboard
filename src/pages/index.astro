@@ -13,10 +13,9 @@ const data = await response.json();
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <title>My Astro Site</title>
+    <title>1001 Albums Project Dashboard</title>
   </head>
   <body>
-    <h1 class='text-xl'>My Astro Site</h1>
     {project ? <History albums={data.history} /> : <p>no project!</p>}
   </body>
 </html>
