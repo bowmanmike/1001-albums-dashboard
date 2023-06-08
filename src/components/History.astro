@@ -1,0 +1,19 @@
+---
+const { albums } = Astro.props;
+console.log(albums);
+---
+
+<h2>History</h2>
+<div>
+  {
+    albums?.map((album) => {
+      return (
+        <div>
+          <p>
+            {album.album.name} by {album.album.artist}
+          </p>
+        </div>
+      );
+    })
+  }
+</div>
