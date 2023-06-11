@@ -2,6 +2,11 @@
 import StarRating from './StarRating';
 const { albums } = Astro.props;
 // console.log(albums);
+const dateFormatter = new Intl.DateTimeFormat('en-ca', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
 <div>
@@ -33,6 +38,10 @@ const { albums } = Astro.props;
                   <div class='flex justify-center'>
                     <StarRating rating={entry.rating} max={5} />
                   </div>
+                </dd>
+                <dt class='sr-only'>Date Listened</dt>
+                <dd class='text-sm text-gray-500'>
+                  {dateFormatter.format(new Date(entry.generatedAt))}
                 </dd>
               </dl>
             </div>
