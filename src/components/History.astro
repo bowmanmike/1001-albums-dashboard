@@ -1,19 +1,44 @@
 ---
+import StarRating from './StarRating';
 const { albums } = Astro.props;
-console.log(albums);
+// console.log(albums);
 ---
 
-<h2>History</h2>
 <div>
-  {
-    albums?.map((album) => {
-      return (
-        <div>
-          <p>
-            {album.album.name} by {album.album.artist}
-          </p>
-        </div>
-      );
-    })
-  }
+  <h2 class='text-3xl font-semibold leading-tight tracking-tight text-gray-900'>
+    History
+  </h2>
+  <ul
+    role='list'
+    class='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+  >
+    {
+      albums?.map((entry) => {
+        return (
+          <li class='col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow'>
+            <div class='flex flex-1 flex-col p-8'>
+              <img
+                class='mx-auto h-32 w-32 flex-shrink-0'
+                src={entry.album.images[0].url}
+                alt=''
+              />
+              <h3 class='mt-6 text-sm font-medium text-gray-900'>
+                {entry.album.name}
+              </h3>
+              <dl class='mt-1 flex flex-grow flex-col justify-between'>
+                <dt class='sr-only'>Artist</dt>
+                <dd class='text-sm text-gray-500'>{entry.album.artist}</dd>
+                <dt class='sr-only'>Rating</dt>
+                <dd class='mt-3'>
+                  <div class='flex justify-center'>
+                    <StarRating rating={entry.rating} max={5} />
+                  </div>
+                </dd>
+              </dl>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
 </div>
