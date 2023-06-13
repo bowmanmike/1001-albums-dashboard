@@ -1,7 +1,8 @@
 ---
 import StarRating from './StarRating';
+
 const { albums } = Astro.props;
-// console.log(albums);
+
 const dateFormatter = new Intl.DateTimeFormat('en-ca', {
   year: 'numeric',
   month: 'long',
@@ -13,37 +14,35 @@ const dateFormatter = new Intl.DateTimeFormat('en-ca', {
   <h2 class='text-3xl font-semibold leading-tight tracking-tight text-gray-900'>
     History
   </h2>
-  <ul
-    role='list'
-    class='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-  >
+  <ul role='list' class='divide-y divide-gray-100'>
     {
       albums?.map((entry) => {
         return (
-          <li class='col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow'>
-            <div class='flex flex-1 flex-col p-8'>
+          <li class='flex justify-between gap-x-6 py-5'>
+            <div class='flex gap-x-4'>
               <img
-                class='mx-auto h-32 w-32 flex-shrink-0'
+                class='h-12 w-12 flex-none bg-gray-50'
                 src={entry.album.images[0].url}
                 alt=''
               />
-              <h3 class='mt-6 text-sm font-medium text-gray-900'>
-                {entry.album.name}
-              </h3>
-              <dl class='mt-1 flex flex-grow flex-col justify-between'>
-                <dt class='sr-only'>Artist</dt>
-                <dd class='text-sm text-gray-500'>{entry.album.artist}</dd>
-                <dt class='sr-only'>Rating</dt>
-                <dd class='mt-3'>
-                  <div class='flex justify-center'>
-                    <StarRating rating={entry.rating} max={5} />
-                  </div>
-                </dd>
-                <dt class='sr-only'>Date Listened</dt>
-                <dd class='text-sm text-gray-500'>
+              <div class='min-w-0 flex-auto'>
+                <p class='text-sm font-semibold leading-6 text-gray-900'>
+                  {entry.album.name}
+                </p>
+                <p class='mt-1 truncate text-xs leading-5 text-gray-500'>
+                  {entry.album.artist}
+                </p>
+              </div>
+            </div>
+            <div class='hidden sm:flex sm:flex-col sm:items-end'>
+              <p class='text-sm leading-6 text-gray-900'>
+                <StarRating rating={entry.rating} max={5} />
+              </p>
+              <p class='mt-1 text-xs leading-5 text-gray-500'>
+                <time datetime={entry.generatedAt}>
                   {dateFormatter.format(new Date(entry.generatedAt))}
-                </dd>
-              </dl>
+                </time>
+              </p>
             </div>
           </li>
         );
