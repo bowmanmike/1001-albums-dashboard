@@ -37,7 +37,6 @@ const StarRating = ({ rating, max }) => {
   const stars = Array(max)
     .fill(null)
     .map((_elem, i) => {
-      console.log({ i });
       if (i < rating) {
         return filledStar;
       } else {
@@ -45,7 +44,11 @@ const StarRating = ({ rating, max }) => {
       }
     });
 
-  return <div className='flex'>{stars}</div>;
+  return (
+    <div key={crypto.randomUUID()} className='flex'>
+      {stars}
+    </div>
+  );
 };
 
 export default StarRating;
