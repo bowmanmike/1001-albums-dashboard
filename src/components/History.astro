@@ -8,6 +8,12 @@ const dateFormatter = new Intl.DateTimeFormat('en-ca', {
   month: 'long',
   day: 'numeric',
 });
+
+// Force numbers to 2 decimal places
+const formatter = new Intl.NumberFormat('en-CA', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 ---
 
 <div>
@@ -45,7 +51,9 @@ const dateFormatter = new Intl.DateTimeFormat('en-ca', {
               </p>
               <p class='text-xs text-gray-500 italic'>
                 Global Rating:{' '}
-                <span class='not-italic'>{entry.globalRating}</span>
+                <span class='not-italic'>
+                  {formatter.format(entry.globalRating)}
+                </span>
               </p>
             </div>
           </li>
