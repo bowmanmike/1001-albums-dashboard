@@ -40,8 +40,12 @@ const dateFormatter = new Intl.DateTimeFormat('en-ca', {
               </p>
               <p class='mt-1 text-xs leading-5 text-gray-500'>
                 <time datetime={entry.generatedAt}>
-                  {dateFormatter.format(new Date(entry.generatedAt))}
+                  Rated on {dateFormatter.format(new Date(entry.generatedAt))}
                 </time>
+              </p>
+              <p class='text-xs text-gray-500 italic'>
+                Global Rating:{' '}
+                <span class='not-italic'>{entry.globalRating}</span>
               </p>
             </div>
           </li>
