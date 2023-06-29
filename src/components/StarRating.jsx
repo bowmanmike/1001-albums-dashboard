@@ -3,12 +3,13 @@ import React from 'react';
 const StarRating = ({ rating, max }) => {
   if (!Number.isInteger(rating)) return 'Not Yet Rated';
 
-  const filledStar = (
+  const filledStar = (key) => (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
       fill='currentColor'
       className='w-6 h-6'
+      key={key}
     >
       <path
         fillRule='evenodd'
@@ -17,7 +18,7 @@ const StarRating = ({ rating, max }) => {
       />
     </svg>
   );
-  const emptyStar = (
+  const emptyStar = (key) => (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
@@ -25,6 +26,7 @@ const StarRating = ({ rating, max }) => {
       strokeWidth={1.5}
       stroke='currentColor'
       className='w-6 h-6'
+      key={key}
     >
       <path
         strokeLinecap='round'
@@ -38,9 +40,9 @@ const StarRating = ({ rating, max }) => {
     .fill(null)
     .map((_elem, i) => {
       if (i < rating) {
-        return filledStar;
+        return filledStar(crypto.randomUUID());
       } else {
-        return emptyStar;
+        return emptyStar(crypto.randomUUID());
       }
     });
 

@@ -16,7 +16,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-ca', {
   </h2>
   <ul role='list' class='divide-y divide-gray-100'>
     {
-      albums?.map((entry) => {
+      albums?.reverse().map((entry) => {
         return (
           <li class='flex flex-col sm:flex-row justify-between gap-6 py-5 mx-2 sm:mx-auto'>
             <div class='flex gap-x-4'>
