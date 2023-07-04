@@ -31,13 +31,13 @@ const signedNumberFormatter = new Intl.NumberFormat('en-CA', {
       albums?.reverse().map((entry) => {
         return (
           <li class='flex flex-col sm:flex-row justify-between gap-6 py-5 mx-2 sm:mx-auto'>
-            <div class='flex gap-x-4'>
+            <div class='flex gap-x-4 flex-none'>
               <img
                 class='h-12 w-12 flex-none bg-gray-50'
                 src={entry.album.images[0].url}
                 alt=''
               />
-              <div class='min-w-0 flex-auto'>
+              <div class='min-w-0'>
                 <p class='text-sm font-semibold leading-6 text-gray-900'>
                   {entry.album.name}
                 </p>
@@ -46,7 +46,10 @@ const signedNumberFormatter = new Intl.NumberFormat('en-CA', {
                 </p>
               </div>
             </div>
-            <div class='sm:flex sm:flex-col sm:items-end'>
+            <div class='flex-initial'>
+              <p class='text-gray-800 text-sm w-full'>{entry.review}</p>
+            </div>
+            <div class='sm:flex sm:flex-col sm:items-end flex-none'>
               <p class='text-sm leading-6 text-gray-900'>
                 <StarRating rating={entry.rating} max={5} />
               </p>
