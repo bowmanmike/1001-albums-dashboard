@@ -17,10 +17,15 @@ const data = await response.json();
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <meta name='viewport' content='width=device-width' />
     <meta name='generator' content={Astro.generator} />
-    <script
-      defer
-      data-domain='1001-albums-dashboard.pages.dev'
-      src='https://plausible.io/js/script.js'></script>
+    {
+      isProd && (
+        <script
+          defer
+          data-domain='1001-albums-dashboard.pages.dev'
+          src='https://plausible.io/js/script.js'
+        />
+      )
+    }
 
     <title>1001 Albums Project Dashboard</title>
   </head>
