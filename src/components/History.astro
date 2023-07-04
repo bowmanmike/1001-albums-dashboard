@@ -31,7 +31,7 @@ const signedNumberFormatter = new Intl.NumberFormat('en-CA', {
       albums?.reverse().map((entry) => {
         return (
           <li class='flex flex-col sm:flex-row flex-start gap-6 py-5 mx-2 sm:mx-auto'>
-            <div class='flex gap-x-4 shrink-0 w-1/6'>
+            <div class='flex gap-x-4 shrink-0 md:w-1/6'>
               <img
                 class='h-12 w-12 flex-none bg-gray-50'
                 src={entry.album.images[0].url}
