@@ -14,6 +14,12 @@ const formatter = new Intl.NumberFormat('en-CA', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+
+const signedNumberFormatter = new Intl.NumberFormat('en-CA', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+  signDisplay: 'always',
+});
 ---
 
 <div>
@@ -55,6 +61,14 @@ const formatter = new Intl.NumberFormat('en-CA', {
                   {formatter.format(entry.globalRating)}
                 </span>
               </p>
+              {!isNaN(entry.rating) && (
+                <p class='text-xs text-gray-500 italic'>
+                  Deviation from average:{' '}
+                  {signedNumberFormatter.format(
+                    entry.rating - entry.globalRating
+                  )}
+                </p>
+              )}
             </div>
           </li>
         );
