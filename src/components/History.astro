@@ -3,6 +3,8 @@ import StarRating from './StarRating';
 
 const { albums } = Astro.props;
 
+const ratedAlbums = albums.filter((album) => !isNaN(album.rating));
+
 const dateFormatter = new Intl.DateTimeFormat('en-ca', {
   year: 'numeric',
   month: 'long',
@@ -23,9 +25,16 @@ const signedNumberFormatter = new Intl.NumberFormat('en-CA', {
 ---
 
 <div>
-  <h2 class='text-3xl font-semibold leading-tight tracking-tight text-gray-900'>
-    History
-  </h2>
+  <div>
+    <h2
+      class='text-3xl font-semibold leading-tight tracking-tight text-gray-900'
+    >
+      History
+    </h2>
+    <p class='text-lg text-gray-600'>
+      {ratedAlbums.length} out of {albums.length} albums rated
+    </p>
+  </div>
   <ul role='list' class='divide-y divide-gray-100'>
     {
       albums?.reverse().map((entry) => {
