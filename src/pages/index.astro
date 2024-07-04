@@ -1,9 +1,9 @@
 ---
-import MainLayout from '../components/MainLayout.astro';
-import History from '../components/History.astro';
+import MainLayout from "../components/MainLayout.astro";
+import History from "../components/History.astro";
 
-const project = Astro.url.searchParams.get('project');
-const isProd = import.meta.env.MODE === 'production';
+const project = Astro.url.searchParams.get("project");
+const isProd = import.meta.env.MODE === "production";
 const url = isProd
   ? `https://1001albumsgenerator.com/api/v1/projects/${project}`
   : `${Astro.url.protocol}${Astro.url.hostname}:${Astro.url.port}/stub.json`;
@@ -11,21 +11,12 @@ const response = await fetch(url);
 const data = await response.json();
 ---
 
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    {
-      isProd && (
-        <script
-          defer
-          data-domain='1001-albums-dashboard.pages.dev'
-          src='https://plausible.io/js/script.js'
-        />
-      )
-    }
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
 
     <title>1001 Albums Project Dashboard</title>
   </head>
