@@ -1,81 +1,81 @@
 ---
-import StarRating from './StarRating';
+import StarRating from "./StarRating";
 
 const { albums } = Astro.props;
 
 const ratedAlbums = albums.filter((album) => !isNaN(album.rating));
 
-const dateFormatter = new Intl.DateTimeFormat('en-ca', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+const dateFormatter = new Intl.DateTimeFormat("en-ca", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 
 // Force numbers to 2 decimal places
-const formatter = new Intl.NumberFormat('en-CA', {
+const formatter2Digits = new Intl.NumberFormat("en-CA", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
 
-const signedNumberFormatter = new Intl.NumberFormat('en-CA', {
+const signedNumberFormatter = new Intl.NumberFormat("en-CA", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-  signDisplay: 'always',
+  signDisplay: "always",
 });
 ---
 
 <div>
   <div>
     <h2
-      class='text-3xl font-semibold leading-tight tracking-tight text-gray-900'
+      class="text-3xl font-semibold leading-tight tracking-tight text-gray-900"
     >
       History
     </h2>
-    <p class='text-lg text-gray-600'>
+    <p class="text-lg text-gray-600">
       {ratedAlbums.length} out of {albums.length} albums rated
     </p>
   </div>
-  <ul role='list' class='divide-y divide-gray-100'>
+  <ul role="list" class="divide-y divide-gray-100">
     {
       albums?.reverse().map((entry) => {
         return (
-          <li class='flex flex-col sm:flex-row flex-start gap-6 py-5 mx-2 sm:mx-auto'>
-            <div class='flex gap-x-4 shrink-0 md:w-1/6'>
+          <li class="flex flex-col sm:flex-row flex-start gap-6 py-5 mx-2 sm:mx-auto">
+            <div class="flex gap-x-4 shrink-0 md:w-1/6">
               <img
-                class='h-12 w-12 flex-none bg-gray-50'
+                class="h-12 w-12 flex-none bg-gray-50"
                 src={entry.album.images[0].url}
-                alt=''
+                alt=""
               />
-              <div class='min-w-0'>
-                <p class='text-sm font-semibold leading-6 text-gray-900'>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold leading-6 text-gray-900">
                   {entry.album.name}
                 </p>
-                <p class='mt-1 truncate text-xs leading-5 text-gray-500'>
+                <p class="mt-1 truncate text-xs leading-5 text-gray-500">
                   {entry.album.artist}
                 </p>
               </div>
             </div>
-            <div class='grow-1 w-full'>
-              <p class='text-gray-800 text-sm w-full'>{entry.review}</p>
+            <div class="grow-1 w-full">
+              <p class="text-gray-800 text-sm w-full">{entry.review}</p>
             </div>
-            <div class='sm:flex sm:flex-col sm:items-end shrink-0'>
-              <p class='text-sm leading-6 text-gray-900'>
+            <div class="sm:flex sm:flex-col sm:items-end shrink-0">
+              <p class="text-sm leading-6 text-gray-900">
                 <StarRating rating={entry.rating} max={5} />
               </p>
-              <p class='mt-1 text-xs leading-5 text-gray-500'>
+              <p class="mt-1 text-xs leading-5 text-gray-500">
                 <time datetime={entry.generatedAt}>
                   Rated on {dateFormatter.format(new Date(entry.generatedAt))}
                 </time>
               </p>
-              <p class='text-xs text-gray-500 italic'>
-                Global Rating:{' '}
-                <span class='not-italic'>
-                  {formatter.format(entry.globalRating)}
+              <p class="text-xs text-gray-500 italic">
+                Global Rating:{" "}
+                <span class="not-italic">
+                  {formatter2Digits.format(entry.globalRating)}
                 </span>
               </p>
               {!isNaN(entry.rating) && (
-                <p class='text-xs text-gray-500 italic'>
-                  Deviation from average:{' '}
+                <p class="text-xs text-gray-500 italic">
+                  Deviation from average:{" "}
                   {signedNumberFormatter.format(
                     entry.rating - entry.globalRating
                   )}
